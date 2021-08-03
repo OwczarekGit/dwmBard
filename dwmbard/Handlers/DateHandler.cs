@@ -5,7 +5,7 @@ namespace dwmBard.Handlers
 {
     public class DateHandler : IParallelWorker, IConfigurable
     {
-        public char separator = '-';
+        public char separator = '.';
         public bool showYear = true;
         
         DateTime today = DateTime.Now;
