@@ -21,7 +21,7 @@ namespace dwmBard
             Console.WriteLine("Started!");
             IParallelWorker tmpWorker;
 
-            tmpWorker = new NetworkHandler((int)CommonTimeouts.Second);
+            tmpWorker = new NetworkHandler((int)CommonTimeouts.ThirtySeconds);
             tmpWorker.setPrefix("");
             workers.Add(tmpWorker);
 

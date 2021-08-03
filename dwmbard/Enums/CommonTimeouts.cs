@@ -5,6 +5,8 @@ namespace dwmBard.Enums
         Second = 1000,
         FiveSeconds = 1000 * 5,
         TenSeconds = 1000 * 10,
+        FifteenSeconds = 1000 * 15,
+        ThirtySeconds = 1000 * 30,
         Minute = 1000 * 60,
         FiveMinutes = 1000 * 60 * 5,
         TenMinutes = 1000 * 60 * 10,
