@@ -35,5 +35,13 @@ namespace dwmBard.Helpers
             return float.Parse(tmp);
         }
 
+        public static string getStringFromFile(string path)
+        {
+            if (!File.Exists(path))
+                return "";
+
+            string tmp = File.ReadAllText(path);
+            return tmp;
+        }
     }
 }
