@@ -17,6 +17,8 @@ namespace dwmBard.Handlers
 
         public override void doWork()
         {
+            try
+            {
                 audioLevel = UInt32.Parse(CommandRunner.getCommandOutput("pamixer --get-volume"));
                 isMuted = Boolean.Parse((ReadOnlySpan<char>) CommandRunner.getCommandOutput("pamixer --get-mute"));
 
@@ -46,11 +48,12 @@ namespace dwmBard.Handlers
                     {
                         returnValuePrefix = Volume.OverTheTop.ToString();
                     }
-                        
+
                 }
 
                 returnValue = $" {audioLevel}%";
                 GC.Collect();
+            }catch{/* Sink doesn't exist error probably, it appears only on first cycle.*/}
         }
     }
 }
