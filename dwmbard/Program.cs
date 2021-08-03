@@ -20,6 +20,10 @@ namespace dwmBard
 
             Console.WriteLine("Started!");
             IParallelWorker tmpWorker;
+            
+            tmpWorker = new MusicHandler((int)CommonTimeouts.FiveSeconds);
+            tmpWorker.setPrefix("");
+            workers.Add(tmpWorker);
 
             tmpWorker = new NetworkHandler((int)CommonTimeouts.ThirtySeconds);
             tmpWorker.setPrefix("");
