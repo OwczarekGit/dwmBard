@@ -20,6 +20,12 @@ namespace dwmBard.Helpers
             return current;
         }
 
+        public int getCurrentPercent()
+        {
+            var result = ((float)current/(float)max)*100;
+            return (int)result;
+        }
+
         public void setCurrent(int value)
         {
             if (value > max)
