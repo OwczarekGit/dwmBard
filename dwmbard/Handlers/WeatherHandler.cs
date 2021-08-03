@@ -1,3 +1,4 @@
+using System;
 using dwmBard.Helpers;
 using dwmBard.Interfaces;
 
@@ -16,6 +17,7 @@ namespace dwmBard.Handlers
             var result = CommandRunner.getCommandOutput($"curl -s \"{provider}/{location}?format={format}\" | cut -c 9-").Trim();
 
             returnValue = $"  {result}";
+            GC.Collect();
         }
     }
 }
