@@ -28,23 +28,21 @@ namespace dwmBard.Handlers
             else
             {
                 returnValuePrefix = "";
-                
-                string artist = CommandRunner.getCommandOutput(artistCommand).Trim();
-                string title = CommandRunner.getCommandOutput(titleCommand).Trim();
-
-                if (status.Equals(""))
-                {
-                    returnValue = $" Nothing";
-                }
-                else
-                { 
-                    returnValue = $" {artist} - {title}";
-                }
-                
+               
             }
 
-            
-            
+            string artist = CommandRunner.getCommandOutput(artistCommand).Trim();
+            string title = CommandRunner.getCommandOutput(titleCommand).Trim();
+
+            if (status.Equals(""))
+            {
+                returnValue = $" Nothing";
+            }
+            else
+            {
+                returnValue = $" {artist} - {title}";
+            }
+
             GC.Collect();
         }
     }
