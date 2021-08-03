@@ -19,11 +19,13 @@ namespace dwmBard.Handlers
 
             if (result.ToLower().Contains("yes"))
             {
-                returnValuePrefix = "";
+                //returnValuePrefix = "";
+                returnValuePrefix = "";
             }
             else
             {
-                returnValuePrefix = "";
+                //returnValuePrefix = "";
+                returnValuePrefix = "";
             }
             
             GC.Collect();
