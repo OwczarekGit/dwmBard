@@ -31,6 +31,11 @@ namespace dwmBard
             workers.Add(tmpWorker);
             
             tmpWorker = new PowerHandler((int)CommonTimeouts.FiveSeconds);
+            tmpWorker.setPrefix("");
+            workers.Add(tmpWorker);
+            
+            tmpWorker = new BrightnessHandler((int)CommonTimeouts.Second);
+            tmpWorker.setPrefix("");
             workers.Add(tmpWorker);
 
             tmpWorker = new DateHandler((int)CommonTimeouts.Minute);
@@ -60,7 +65,7 @@ namespace dwmBard
 
             var converted = composed.Remove(composed.Length - 2, 2);
             
-            //CommandRunner.getCommandOutput($"xsetroot -name '{converted}'");
+            CommandRunner.getCommandOutput($"xsetroot -name '{converted}'");
             Console.WriteLine(converted);
         }
     }
