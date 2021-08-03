@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using dwmBard.Enums;
 using dwmBard.Handlers;
 using dwmBard.Helpers;
 using dwmBard.Interfaces;
@@ -20,19 +21,23 @@ namespace dwmBard
             Console.WriteLine("Started!");
             IParallelWorker tmpWorker;
 
-            tmpWorker = new WeatherHandler(1000*60*10); // Every ten minutes
+
+            tmpWorker = new WeatherHandler((int)CommonTimeouts.ThirtyMinutes);
             tmpWorker.setPrefix("");
             workers.Add(tmpWorker);
 
-            tmpWorker = new SoundHandler(1000); // Every second
+            tmpWorker = new SoundHandler((int)CommonTimeouts.Second);
             tmpWorker.setPrefix("");
             workers.Add(tmpWorker);
+            
+            tmpWorker = new PowerHandler((int)CommonTimeouts.FiveSeconds);
+            workers.Add(tmpWorker);
 
-            tmpWorker = new DateHandler(1000 * 60); // Every minute
+            tmpWorker = new DateHandler((int)CommonTimeouts.Minute);
             tmpWorker.setPrefix("");
             workers.Add(tmpWorker);
 
-            tmpWorker = new TimeHandler(1000); // Every second
+            tmpWorker = new TimeHandler((int)CommonTimeouts.Second);
             tmpWorker.setPrefix("");
             workers.Add(tmpWorker);
             
@@ -42,7 +47,7 @@ namespace dwmBard
             while (true)
             {
                 cycleWorkers();
-                Thread.Sleep(1000);
+                Thread.Sleep((int)CommonTimeouts.Second);
             }
         }
 
@@ -54,7 +59,9 @@ namespace dwmBard
                 composed += $"{worker.getResult()} | ";
 
             var converted = composed.Remove(composed.Length - 2, 2);
-            CommandRunner.getCommandOutput($"xsetroot -name '{converted}'");
+            
+            //CommandRunner.getCommandOutput($"xsetroot -name '{converted}'");
+            Console.WriteLine(converted);
         }
     }
 }
