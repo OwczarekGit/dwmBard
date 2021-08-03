@@ -32,6 +32,10 @@ namespace dwmBard
             tmpWorker = new WeatherHandler((int)CommonTimeouts.ThirtyMinutes);
             tmpWorker.setPrefix("");
             workers.Add(tmpWorker);
+            
+            tmpWorker = new MicrophoneHandler((int)CommonTimeouts.TenSeconds);
+            tmpWorker.setPrefix("");
+            workers.Add(tmpWorker);
 
             tmpWorker = new SoundHandler((int)CommonTimeouts.Second);
             tmpWorker.setPrefix("");
@@ -73,7 +77,7 @@ namespace dwmBard
             var converted = composed.Remove(composed.Length - 2, 2);
             
             CommandRunner.getCommandOutput($"xsetroot -name '{converted}'");
-            Console.WriteLine(converted);
+            //Console.WriteLine(converted);
         }
     }
 }
