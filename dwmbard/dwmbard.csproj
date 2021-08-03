@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>wmExtender</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Mono.Unix" Version="7.0.0-final.1.21369.2" />
+      <PackageReference Include="X11" Version="1.0.6" />
+    </ItemGroup>
+
+</Project>
