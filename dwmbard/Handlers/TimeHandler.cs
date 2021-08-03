@@ -5,7 +5,7 @@ namespace dwmBard.Handlers
 {
     public class TimeHandler : IParallelWorker, IConfigurable
     {
-        public bool showSeconds = true;
+        public bool showSeconds = false;
         public bool timeFormat24 = true;
         
         DateTime now = DateTime.Now;
