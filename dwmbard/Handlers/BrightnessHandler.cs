@@ -12,6 +12,8 @@ namespace dwmBard.Handlers
         
         public BrightnessHandler(int refreshTimeMs) : base(refreshTimeMs)
         {
+            manualRefreshPossible = true;
+            
             foreach (var backlight in Directory.GetDirectories(backlightDirectory))
             {
                 backlights.Add(new Backlight(backlight));
