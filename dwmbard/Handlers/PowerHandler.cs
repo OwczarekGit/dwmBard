@@ -29,7 +29,12 @@ namespace dwmBard.Handlers
 
         public override void doWork()
         {
-            isPlugged = acPower.isPlugged();
+            if(acPower != null) 
+                isPlugged = acPower.isPlugged();
+            else
+            {
+                isPlugged = true;
+            }
             
             int sum = 0;
             foreach (var battery in batteries)
@@ -41,6 +46,10 @@ namespace dwmBard.Handlers
                 int chargePercent = sum / batteries.Count; 
                 returnValue = $" {chargePercent}%";
                 returnValuePrefix = definePrefix(chargePercent);
+            }
+            else
+            {
+                returnValuePrefix = Power.AC.ToString();
             }
         }
 
