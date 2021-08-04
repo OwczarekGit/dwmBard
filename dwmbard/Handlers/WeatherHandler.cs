@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using System.Text.RegularExpressions;
 using dwmBard.Helpers;
 using dwmBard.Interfaces;
 
@@ -14,9 +16,12 @@ namespace dwmBard.Handlers
 
         public override void doWork()
         {
-            var result = CommandRunner.getCommandOutput($"curl -s \"{provider}/{location}?format={format}\" | cut -c 9-").Trim();
-
-            returnValue = $"  {result}";
+            var result = CommandRunner.getCommandOutput($"curl -s \"{provider}/{location}?format={format}").Trim();
+            var value = CommandRunner.getCommandOutput($"echo {result} | sed 's/.*[+-]//g'").Trim();
+            var isPositive = result.Contains('+');
+            var sign = isPositive ? "+" : "-";
+            
+            returnValue = $"  {sign}{value}";
             GC.Collect();
         }
     }
