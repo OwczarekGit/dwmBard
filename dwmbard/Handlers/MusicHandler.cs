@@ -39,7 +39,7 @@ namespace dwmBard.Handlers
             }
             else
             {
-                returnValue = $" {artist} - {title}";
+                returnValue = $" {artist} - {title}".Replace('\'', '`').Replace('\"','`');
             }
 
             GC.Collect();

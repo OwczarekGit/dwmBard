@@ -74,10 +74,10 @@ namespace dwmBard
             foreach (var worker in workers)
                 composed += $"{worker.getResult()} | ";
 
-            var converted = composed.Remove(composed.Length - 2, 2);
+            var converted = composed.Remove(composed.Length - 1, 1);
             
-            CommandRunner.getCommandOutput($"xsetroot -name '{converted}'");
-            //Console.WriteLine(converted);
+            CommandRunner.getCommandOutput($"xsetroot -name \'{converted}\'");
+            //Console.WriteLine(res);
         }
     }
 }
