@@ -19,7 +19,7 @@ namespace dwmBard.Handlers
 
         public override void doWork()
         {
-            var status = CommandRunner.getCommandOutput(statusCommand);
+            var status = CommandRunner.getCommandOutput(statusCommand).Trim();
 
             if (status.ToLower().Contains("playing"))
             {
@@ -28,7 +28,6 @@ namespace dwmBard.Handlers
             else
             {
                 returnValuePrefix = "";
-               
             }
 
             string artist = CommandRunner.getCommandOutput(artistCommand).Trim();
