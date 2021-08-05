@@ -7,7 +7,7 @@ using dwmBard.Interfaces;
 
 namespace dwmBard.Handlers
 {
-    public class PowerHandler : IParallelWorker, IConfigurable
+    public class PowerHandler : IParallelWorker
     {
         public static string powerDirectory = $"/sys/class/power_supply";
         private List<Battery> batteries = new List<Battery>();

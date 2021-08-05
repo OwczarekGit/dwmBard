@@ -3,7 +3,7 @@ using dwmBard.Interfaces;
 
 namespace dwmBard.Handlers
 {
-    public class DateHandler : IParallelWorker, IConfigurable
+    public class DateHandler : IParallelWorker
     {
         public char separator = '.';
         public bool showYear = true;

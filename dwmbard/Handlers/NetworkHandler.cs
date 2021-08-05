@@ -4,7 +4,7 @@ using dwmBard.Interfaces;
 
 namespace dwmBard.Handlers
 {
-    public class NetworkHandler : IParallelWorker, IConfigurable
+    public class NetworkHandler : IParallelWorker
     {
         public NetworkHandler(int refreshTimeMs) : base(refreshTimeMs){}
 

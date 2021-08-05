@@ -6,7 +6,7 @@ using dwmBard.Interfaces;
 
 namespace dwmBard.Handlers
 {
-    public class WeatherHandler : IParallelWorker, IConfigurable
+    public class WeatherHandler : IParallelWorker
     {
         private string provider = "wttr.in";
         private string location = "Warsaw";
@@ -19,7 +19,7 @@ namespace dwmBard.Handlers
             var result = CommandRunner.getCommandOutput($"curl -s \"{provider}/{location}?format={format}").Trim();
             var value = CommandRunner.getCommandOutput($"echo {result} | sed 's/.*[+-]//g'").Trim();
             var isPositive = result.Contains('+');
-            var sign = isPositive ? "+" : "-";
+            var sign = isPositive ? "" : "-";
             
             returnValue = $"  {sign}{value}";
             GC.Collect();

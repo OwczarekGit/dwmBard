@@ -5,7 +5,7 @@ using dwmBard.Interfaces;
 
 namespace dwmBard.Handlers
 {
-    public class BrightnessHandler : IParallelWorker, IConfigurable
+    public class BrightnessHandler : IParallelWorker 
     {
         public static string backlightDirectory = $"/sys/class/backlight";
         private List<Backlight> backlights = new List<Backlight>();

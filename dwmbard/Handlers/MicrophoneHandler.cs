@@ -4,7 +4,7 @@ using dwmBard.Interfaces;
 
 namespace dwmBard.Handlers
 {
-    public class MicrophoneHandler : IParallelWorker, IConfigurable
+    public class MicrophoneHandler : IParallelWorker 
     {
         private string microphoneStatusCommand = "pactl get-source-mute @DEFAULT_SOURCE@";
         

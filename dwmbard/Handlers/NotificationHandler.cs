@@ -3,7 +3,7 @@ using dwmBard.Interfaces;
 
 namespace dwmBard
 {
-    public class NotificationHandler : IParallelWorker, IConfigurable
+    public class NotificationHandler : IParallelWorker
     {
         private string getStatusCommand = "dunstctl is-paused";
         private string pauseCommand     = "dunstctl set-paused true";

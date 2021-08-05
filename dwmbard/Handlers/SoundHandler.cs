@@ -5,7 +5,7 @@ using dwmBard.Interfaces;
 
 namespace dwmBard.Handlers
 {
-    public class SoundHandler : IParallelWorker, IConfigurable
+    public class SoundHandler : IParallelWorker
     {
         private uint audioLevel = 0;
         private bool isMuted    = false;

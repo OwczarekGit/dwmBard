@@ -4,7 +4,7 @@ using dwmBard.Interfaces;
 
 namespace dwmBard.Handlers
 {
-    public class MusicHandler : IParallelWorker, IConfigurable
+    public class MusicHandler : IParallelWorker
     {
         private string titleCommand  = "playerctl metadata title";
         private string artistCommand = "playerctl metadata artist";
