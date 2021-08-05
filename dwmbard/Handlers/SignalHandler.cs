@@ -21,15 +21,12 @@ namespace dwmBard.Handlers
             var signal = new UnixSignal(Signum.SIGUSR1);
             while (running)
             {
-                if (signal.WaitOne(Timeout.Infinite,false))
+                if (signal.WaitOne(Timeout.Infinite, false))
                 {
                     foreach (var worker in targetWorkers)
-                    {
                         if (worker.manualRefreshPossible)
-                        {
                             worker.doWork();
-                        }
-                    }
+                    
                     Program.cycleWorkers();
                 }
             }
