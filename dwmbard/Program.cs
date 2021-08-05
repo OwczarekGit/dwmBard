@@ -33,6 +33,10 @@ namespace dwmBard
             tmpWorker.setPrefix("");
             workers.Add(tmpWorker);
             
+            tmpWorker = new NotificationHandler((int)CommonTimeouts.TenSeconds);
+            tmpWorker.setPrefix("");
+            workers.Add(tmpWorker);
+            
             tmpWorker = new MicrophoneHandler((int)CommonTimeouts.TenSeconds);
             tmpWorker.setPrefix("");
             workers.Add(tmpWorker);
@@ -77,7 +81,7 @@ namespace dwmBard
             var converted = composed.Remove(composed.Length - 1, 1);
             
             CommandRunner.getCommandOutput($"xsetroot -name \'{converted}\'");
-            //Console.WriteLine(res);
+            //Console.WriteLine(converted);
         }
     }
 }
