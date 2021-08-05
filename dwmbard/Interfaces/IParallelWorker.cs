@@ -28,7 +28,9 @@ namespace dwmBard.Interfaces
         {
             while (running)
             {
-                doWork();
+                if (isEnabled) 
+                    doWork();
+                
                 waitCycle();
             }
         }

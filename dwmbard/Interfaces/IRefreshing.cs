@@ -7,6 +7,8 @@ namespace dwmBard.Interfaces
         protected int refreshTimeMS;
         protected string returnValue = "";
         protected string returnValuePrefix = "";
+        public bool isEnabled { get; protected set; } = true;
+
         public bool manualRefreshPossible { protected set; get; } = false;
 
         public void waitCycle()
