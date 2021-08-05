@@ -6,15 +6,22 @@ using dwmBard.Handlers;
 using dwmBard.Helpers;
 using dwmBard.Interfaces;
 using Mono.Unix;
+using wmExtender.Structures;
 
 namespace dwmBard
 {
     class Program
     {
         public static List<IParallelWorker> workers = new List<IParallelWorker>();
+        public static string CONFIG_DIRECTORY_PATH { get; private set; }
+        public const string CONFIG_FILE = "dwmbard.conf";
+        public static Config config;
 
         static void Main(string[] args)
         {
+            CONFIG_DIRECTORY_PATH = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}/.config/dwmBard";
+            config = new Config($"{CONFIG_DIRECTORY_PATH}/{CONFIG_FILE}");
+            
             var unixSignal = new SignalHandler(workers);
             unixSignal.start();
 
@@ -60,9 +67,14 @@ namespace dwmBard
             tmpWorker = new TimeHandler((int)CommonTimeouts.Second);
             tmpWorker.setPrefix("");
             workers.Add(tmpWorker);
-            
+
+            foreach (var worker in workers)
+                if (worker is IConfigurable)
+                    (worker as IConfigurable).configure();
+
             foreach (var worker in workers)
                 worker.start();
+            
 
             while (true)
             {
@@ -76,7 +88,8 @@ namespace dwmBard
             string composed = "";
 
             foreach (var worker in workers)
-                composed += $"{worker.getResult()} | ";
+                if (worker.isEnabled)
+                    composed += $"{worker.getResult()} | ";
 
             var converted = composed.Remove(composed.Length - 1, 1);
             
