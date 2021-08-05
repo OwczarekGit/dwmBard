@@ -7,7 +7,7 @@ namespace wmExtender.Structures
 {
     public class Config
     {
-        private string configFile;
+        public string configFile { get; private set; }
         private List<PropertyValue> values;
         
         public Config(string path)
