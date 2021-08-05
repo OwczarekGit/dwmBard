@@ -98,6 +98,7 @@ namespace dwmBard
             //Console.WriteLine(converted);
         }
 
+        // TODO: For some reason it only works in IDE, why? idk. ¯\_(ツ)_/¯
         private static void initWatcher()
         {
             while (true)
