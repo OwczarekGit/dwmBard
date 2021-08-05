@@ -49,7 +49,6 @@ namespace dwmBard.Handlers
         {
             var tmpFormat = Program.config.getConfigValue("TimeHandler.timeformat24");
             timeFormat24 = tmpFormat != null ? bool.Parse(tmpFormat) : timeFormat24;
-            Console.WriteLine(tmpFormat);
             
             var tmpSec = Program.config.getConfigValue("TimeHandler.showseconds");
             showSeconds = tmpSec != null ? bool.Parse(tmpSec) : showSeconds;
