@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading;
 using dwmBard.Enums;
 using dwmBard.Handlers;
@@ -20,7 +21,6 @@ namespace dwmBard
         static void Main(string[] args)
         {
             CONFIG_DIRECTORY_PATH = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}/.config/dwmBard";
-            config = new Config($"{CONFIG_DIRECTORY_PATH}/{CONFIG_FILE}");
             
             var unixSignal = new SignalHandler(workers);
             unixSignal.start();
@@ -68,9 +68,10 @@ namespace dwmBard
             tmpWorker.setPrefix("");
             workers.Add(tmpWorker);
 
-            foreach (var worker in workers)
-                if (worker is IConfigurable)
-                    (worker as IConfigurable).configure();
+            var configWatcher = new Thread(initWatcher);
+            configWatcher.Start();
+
+            reloadConfig(null,null);
 
             foreach (var worker in workers)
                 worker.start();
@@ -93,8 +94,33 @@ namespace dwmBard
 
             var converted = composed.Remove(composed.Length - 1, 1);
             
-            CommandRunner.getCommandOutput($"xsetroot -name \'{converted}\'");
-            //Console.WriteLine(converted);
+            //CommandRunner.getCommandOutput($"xsetroot -name \'{converted}\'");
+            Console.WriteLine(converted);
+        }
+
+        private static void initWatcher()
+        {
+            while (true)
+            {
+                var watcher = new FileSystemWatcher(CONFIG_DIRECTORY_PATH);
+                watcher.Filter = CONFIG_FILE;
+                watcher.EnableRaisingEvents = true;
+                watcher.Changed += reloadConfig;
+                Thread.Sleep((int) CommonTimeouts.Hour);
+            }
+        }
+        
+        public static void reloadConfig(object sender, FileSystemEventArgs e)
+        {
+            config = new Config($"{CONFIG_DIRECTORY_PATH}/{CONFIG_FILE}");
+            
+            foreach (var worker in workers)
+                if (worker is IConfigurable)
+                    (worker as IConfigurable).configure();
+
+            foreach (var worker in workers)
+                worker.doWork();
+                
         }
     }
 }
