@@ -94,8 +94,8 @@ namespace dwmBard
 
             var converted = composed.Remove(composed.Length - 1, 1);
             
-            //CommandRunner.getCommandOutput($"xsetroot -name \'{converted}\'");
-            Console.WriteLine(converted);
+            CommandRunner.getCommandOutput($"xsetroot -name \'{converted}\'");
+            //Console.WriteLine(converted);
         }
 
         private static void initWatcher()
