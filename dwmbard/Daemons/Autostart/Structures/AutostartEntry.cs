@@ -21,9 +21,11 @@ namespace dwmBard.Daemons
 
         public void assureIsRunning()
         {
-            if ((!keepRunning || isRunning()) && startedOnce) return;
+            if ((!keepRunning || isRunning()) && startedOnce)
+                return;
+            
             startedOnce = true;
-            CommandRunner.getCommandOutput($"{pgrepName}");
+            CommandRunner.runCommand($"{processName}");
         }
         
 
