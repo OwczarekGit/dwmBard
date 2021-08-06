@@ -105,8 +105,8 @@ namespace dwmBard.Daemons
 
             var converted = composed.Remove(composed.Length - 1, 1);
 
-            //CommandRunner.getCommandOutput($"xsetroot -name \'{converted}\'");
-            Console.WriteLine(converted);
+            CommandRunner.getCommandOutput($"xsetroot -name \'{converted}\'");
+            //Console.WriteLine(converted);
         }
 
         public static void reloadConfig(object sender, FileSystemEventArgs e)
