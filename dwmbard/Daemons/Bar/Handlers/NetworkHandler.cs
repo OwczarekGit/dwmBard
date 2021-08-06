@@ -13,9 +13,6 @@ namespace dwmBard.Handlers
             var addresses = CommandRunner.getCommandOutput($"nmcli -p | grep \"inet4\" | sed 's/.*inet4 //g; s/\\/.*$//g'")
                 .Trim().Replace("\n"," | "); 
 
-            // TODO: Check if it works correctly for multiple network cards.
-            //var addressesSeparated = addresses.Split(' ');
-
             returnValue = $" {addresses}";
             GC.Collect();
         }
