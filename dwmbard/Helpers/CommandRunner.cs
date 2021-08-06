@@ -26,6 +26,23 @@ namespace dwmBard.Helpers
 
             return result;
         }
+        
+        public static void runCommand(string command)
+                {
+                    var process = new Process
+                    {
+                        StartInfo = new ProcessStartInfo
+                        {
+                            FileName = "/bin/bash",
+                            Arguments = $"-c \"{command}\"",
+                            CreateNoWindow = true,
+                            RedirectStandardOutput = true,
+                            UseShellExecute = false,
+                        }
+                    };
+        
+                    process.Start();
+                }
 
         public static float getValueFromFile(string path)
         {
