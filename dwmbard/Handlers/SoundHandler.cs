@@ -40,7 +40,7 @@ namespace dwmBard.Handlers
                     {
                         returnValuePrefix = Volume.High.ToString();
                     }
-                    else if (NumberUtilities.isInRange(audioLevel, 101, 150))
+                    else if (NumberUtilities.isInRange(audioLevel, 101, 149))
                     {
                         returnValuePrefix = Volume.Overamplified.ToString();
                     }
