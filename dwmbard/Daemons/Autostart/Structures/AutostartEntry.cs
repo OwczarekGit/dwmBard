@@ -1,4 +1,6 @@
 using System;
+using System.Diagnostics;
+using System.Threading;
 using dwmBard.Helpers;
 
 namespace dwmBard.Daemons
@@ -8,7 +10,8 @@ namespace dwmBard.Daemons
         public string processName { get; private set; }
         public string pgrepName   { get; private set; }
         public bool keepRunning   { get; private set; }
-        private bool startedOnce = false;
+        private bool running = false;
+        private Thread runner;
         
         // Autostart entry structure.
         public AutostartEntry(string processName, bool keepRunning, string? pgrepName=null)
@@ -17,6 +20,16 @@ namespace dwmBard.Daemons
             this.keepRunning = keepRunning;
 
             this.pgrepName = pgrepName ?? processName;
+            runner = new Thread(assureIsRunning);
+        }
+
+        public void start()
+        {
+            if (running)
+                return;
+            
+            running = true;
+            runner.Start();
         }
 
         /* TODO: Fix ↓
@@ -24,13 +37,27 @@ namespace dwmBard.Daemons
          isn't provided the isRunning check will be pgreping processName
          with the parameters.
         */
-        public void assureIsRunning()
+        private void assureIsRunning()
         {
-            if ((!keepRunning || isRunning()) && startedOnce)
-                return;
-            
-            startedOnce = true;
-            CommandRunner.runCommand($"{processName}");
+            do
+            {
+                var process = new Process
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = "/bin/bash",
+                        Arguments = $"-c \"{processName}\"",
+                        CreateNoWindow = true,
+                        RedirectStandardOutput = true,
+                        UseShellExecute = false,
+                    }
+                };
+
+                process.Start();
+                process.WaitForExit();
+                Console.WriteLine(process.StandardOutput.ReadToEnd());
+                
+            } while (keepRunning);
         }
         
 
