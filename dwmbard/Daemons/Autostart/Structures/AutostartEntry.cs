@@ -19,6 +19,11 @@ namespace dwmBard.Daemons
             this.pgrepName = pgrepName ?? processName;
         }
 
+        /* TODO: Fix ↓
+         If processName contains additional parameters and pgrepName
+         isn't provided the isRunning check will be pgreping processName
+         with the parameters.
+        */
         public void assureIsRunning()
         {
             if ((!keepRunning || isRunning()) && startedOnce)
