@@ -19,12 +19,12 @@ namespace dwmBard.Daemons
 
         public static void start()
         {
+            Console.WriteLine("Bar daemon started!");
             CONFIG_DIRECTORY_PATH = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}/.config/dwmBard";
             
             var unixSignal = new SignalHandler(Bar.workers);
             unixSignal.start();
 
-            Console.WriteLine("Started!");
             IParallelWorker tmpWorker;
 
             tmpWorker = new MusicHandler((int) CommonTimeouts.FiveSeconds);
@@ -93,8 +93,8 @@ namespace dwmBard.Daemons
 
             var converted = composed.Remove(composed.Length - 1, 1);
 
-            //CommandRunner.getCommandOutput($"xsetroot -name \'{converted}\'");
-            Console.WriteLine(converted);
+            CommandRunner.getCommandOutput($"xsetroot -name \'{converted}\'");
+            //Console.WriteLine(converted);
         }
 
         public static void reloadConfig(object sender, FileSystemEventArgs e)
