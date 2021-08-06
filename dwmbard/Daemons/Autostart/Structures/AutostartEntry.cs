@@ -1,4 +1,5 @@
 using System;
+using dwmBard.Helpers;
 
 namespace dwmBard.Daemons
 {
@@ -7,6 +8,7 @@ namespace dwmBard.Daemons
         public string processName { get; private set; }
         public string pgrepName   { get; private set; }
         public bool keepRunning   { get; private set; }
+        private bool startedOnce = false;
         
         // Autostart entry structure.
         public AutostartEntry(string processName, bool keepRunning, string? pgrepName=null)
@@ -16,6 +18,14 @@ namespace dwmBard.Daemons
 
             this.pgrepName = pgrepName ?? processName;
         }
+
+        public void assureIsRunning()
+        {
+            if ((!keepRunning || isRunning()) && startedOnce) return;
+            startedOnce = true;
+            CommandRunner.getCommandOutput($"{pgrepName}");
+        }
+        
 
         public bool isRunning()
         {

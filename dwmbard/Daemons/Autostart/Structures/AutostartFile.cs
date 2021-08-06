@@ -6,7 +6,7 @@ namespace dwmBard.Daemons
 {
     public class AutostartFile
     {
-        private List<AutostartEntry> autostartEntries;
+        public List<AutostartEntry> autostartEntries { get; private set; }
         public string autostartFile { get; private set; }
 
         public AutostartFile(string path)
@@ -41,7 +41,8 @@ namespace dwmBard.Daemons
                     if (lineSplit.Length > 2)
                         tmpProcName = lineSplit[2];
 
-                    var tmpEntry = new AutostartEntry(tmpName, bool.Parse(tmpKeepRunning), tmpProcName.Replace(" ",""));
+                    var tmpEntry = new AutostartEntry(tmpName, bool.Parse(tmpKeepRunning), tmpProcName);
+                    Console.WriteLine(tmpEntry.toString());
                     autostartEntries.Add(tmpEntry);
                 }
                 catch{ Console.WriteLine($"Syntax error in autostart entry: {line}"); }
