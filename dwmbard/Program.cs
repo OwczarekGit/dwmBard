@@ -1,4 +1,7 @@
-﻿using dwmBard.Daemons;
+﻿using System;
+using System.Threading;
+using dwmBard.Daemons;
+using dwmBard.Enums;
 
 namespace dwmBard
 {
@@ -8,6 +11,9 @@ namespace dwmBard
         {
             Autostart.start();
             Bar.start();
+
+            while (true)
+                Thread.Sleep((int)CommonTimeouts.Minute);
         }
     }
 }
