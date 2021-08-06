@@ -1,6 +1,7 @@
 using System;
 using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
+using dwmBard.Daemons;
 using dwmBard.Interfaces;
 
 namespace dwmBard.Handlers
@@ -47,10 +48,10 @@ namespace dwmBard.Handlers
 
         void IConfigurable.configure()
         {
-            var tmpFormat = Program.config.getConfigValue("TimeHandler.timeformat24");
+            var tmpFormat = Bar.config.getConfigValue("TimeHandler.timeformat24");
             timeFormat24 = tmpFormat != null ? bool.Parse(tmpFormat) : timeFormat24;
             
-            var tmpSec = Program.config.getConfigValue("TimeHandler.showseconds");
+            var tmpSec = Bar.config.getConfigValue("TimeHandler.showseconds");
             showSeconds = tmpSec != null ? bool.Parse(tmpSec) : showSeconds;
         }
     }

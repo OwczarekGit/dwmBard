@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using dwmBard;
+using dwmBard.Daemons;
 
 namespace wmExtender.Structures
 {
@@ -24,7 +25,7 @@ namespace wmExtender.Structures
 
         private void createDefaultConfig()
         {
-            Directory.CreateDirectory(Program.CONFIG_DIRECTORY_PATH);
+            Directory.CreateDirectory(Bar.CONFIG_DIRECTORY_PATH);
             File.Create(configFile);
             Console.WriteLine($"Created default config in: {configFile}");
         }

@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
+using dwmBard.Daemons;
 using dwmBard.Helpers;
 using dwmBard.Interfaces;
 
@@ -33,10 +34,10 @@ namespace dwmBard.Handlers
 
         public void configure()
         {
-            var tmpLocation = Program.config.getConfigValue("WeatherHandler.location");
+            var tmpLocation = Bar.config.getConfigValue("WeatherHandler.location");
             location = tmpLocation != null ? tmpLocation : location;
             
-            var tmpUnit = Program.config.getConfigValue("WeatherHandler.displayinf");
+            var tmpUnit = Bar.config.getConfigValue("WeatherHandler.displayinf");
             tempInF = tmpUnit != null ? bool.Parse(tmpUnit) : tempInF;
         }
     }

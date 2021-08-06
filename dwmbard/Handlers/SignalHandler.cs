@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading;
+using dwmBard.Daemons;
 using dwmBard.Interfaces;
 using Mono.Unix;
 using Mono.Unix.Native;
@@ -27,7 +28,7 @@ namespace dwmBard.Handlers
                         if (worker.manualRefreshPossible)
                             worker.doWork();
                     
-                    Program.cycleWorkers();
+                    Bar.cycleWorkers();
                 }
             }
         }
