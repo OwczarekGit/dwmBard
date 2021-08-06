@@ -13,70 +13,82 @@ namespace dwmBard.Daemons
     public class Bar
     {
         public const string CONFIG_FILE = "dwmbard.conf";
-        public static List<IParallelWorker> workers = new List<IParallelWorker>();
+        public static List<IParallelWorker> handlers = new List<IParallelWorker>();
         public static Config config;
         public static string CONFIG_DIRECTORY_PATH { get; private set; }
+        
+        private static Thread worker;
+        public static bool running = false;
 
         public static void start()
         {
             Console.WriteLine("Bar daemon started!");
             CONFIG_DIRECTORY_PATH = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}/.config/dwmBard";
             
-            var unixSignal = new SignalHandler(Bar.workers);
+            var unixSignal = new SignalHandler(handlers);
             unixSignal.start();
 
             IParallelWorker tmpWorker;
 
             tmpWorker = new MusicHandler((int) CommonTimeouts.FiveSeconds);
             tmpWorker.setPrefix("");
-            workers.Add(tmpWorker);
+            handlers.Add(tmpWorker);
 
             tmpWorker = new NetworkHandler((int) CommonTimeouts.ThirtySeconds);
             tmpWorker.setPrefix("");
-            workers.Add(tmpWorker);
+            handlers.Add(tmpWorker);
 
             tmpWorker = new WeatherHandler((int) CommonTimeouts.ThirtyMinutes);
             tmpWorker.setPrefix("");
-            workers.Add(tmpWorker);
+            handlers.Add(tmpWorker);
 
             tmpWorker = new NotificationHandler((int) CommonTimeouts.TenSeconds);
             tmpWorker.setPrefix("");
-            workers.Add(tmpWorker);
+            handlers.Add(tmpWorker);
 
             tmpWorker = new MicrophoneHandler((int) CommonTimeouts.TenSeconds);
             tmpWorker.setPrefix("");
-            workers.Add(tmpWorker);
+            handlers.Add(tmpWorker);
 
             tmpWorker = new SoundHandler((int) CommonTimeouts.Second);
             tmpWorker.setPrefix("");
-            workers.Add(tmpWorker);
+            handlers.Add(tmpWorker);
 
             tmpWorker = new PowerHandler((int) CommonTimeouts.FiveSeconds);
             tmpWorker.setPrefix("");
-            workers.Add(tmpWorker);
+            handlers.Add(tmpWorker);
 
             tmpWorker = new BrightnessHandler((int) CommonTimeouts.Second);
             tmpWorker.setPrefix("");
-            workers.Add(tmpWorker);
+            handlers.Add(tmpWorker);
 
             tmpWorker = new DateHandler((int) CommonTimeouts.Minute);
             tmpWorker.setPrefix("");
-            workers.Add(tmpWorker);
+            handlers.Add(tmpWorker);
 
             tmpWorker = new TimeHandler((int) CommonTimeouts.Second);
             tmpWorker.setPrefix("");
-            workers.Add(tmpWorker);
+            handlers.Add(tmpWorker);
 
             var configWatcher = new Thread(initWatcher);
             configWatcher.Start();
 
+            worker = new Thread(begin);
+            worker.Start();
+        }
+
+        public static void begin()
+        {
+            if (running)
+                return;
+            
             reloadConfig(null, null);
+            
+            foreach (var handler in handlers)
+                handler.start();
 
-            foreach (var worker in Bar.workers)
-                worker.start();
-
-
-            while (true)
+            running = true;
+            while (running)
             {
                 cycleWorkers();
                 Thread.Sleep((int) CommonTimeouts.Second);
@@ -87,26 +99,26 @@ namespace dwmBard.Daemons
         {
             string composed = "";
 
-            foreach (var worker in Bar.workers)
-                if (worker.isEnabled)
-                    composed += $"{worker.getResult()} | ";
+            foreach (var handler in handlers)
+                if (handler.isEnabled)
+                    composed += $"{handler.getResult()} | ";
 
             var converted = composed.Remove(composed.Length - 1, 1);
 
-            CommandRunner.getCommandOutput($"xsetroot -name \'{converted}\'");
-            //Console.WriteLine(converted);
+            //CommandRunner.getCommandOutput($"xsetroot -name \'{converted}\'");
+            Console.WriteLine(converted);
         }
 
         public static void reloadConfig(object sender, FileSystemEventArgs e)
         {
-            Bar.config = new Config($"{Bar.CONFIG_DIRECTORY_PATH}/{Bar.CONFIG_FILE}");
+            config = new Config($"{CONFIG_DIRECTORY_PATH}/{CONFIG_FILE}");
 
-            foreach (var worker in Bar.workers)
-                if (worker is IConfigurable)
-                    (worker as IConfigurable).configure();
+            foreach (var handler in handlers)
+                if (handler is IConfigurable)
+                    (handler as IConfigurable).configure();
 
-            foreach (var worker in Bar.workers)
-                worker.doWork();
+            foreach (var handler in handlers)
+                handler.doWork();
         }
 
         // TODO: For some reason it only works in IDE, why? idk. ¯\_(ツ)_/¯
