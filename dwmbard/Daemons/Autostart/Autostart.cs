@@ -6,7 +6,7 @@ namespace dwmBard.Daemons
 {
     public class Autostart
     {
-        public const string AUTOSTART_FILE = "dwautostart";
+        public const string AUTOSTART_FILE = "autostart";
         public static string AUTOSTART_DIRECTORY_PATH;
         public static AutostartFile autostart;
         
