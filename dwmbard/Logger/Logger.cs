@@ -1,13 +1,16 @@
 using System;
 using System.IO;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading;
+using dwmBard.Enums;
 
 namespace dwmBard.Logger
 {
-    public class Logger
+    public static class Logger
     {
         public static string LOGGING_FILE;
         public static string LOGGING_FILE_DIRECTORY;
-        private static StreamWriter writer;
         private static DateTime timeStarted;
         private static bool enableLogging = true;
 
@@ -50,19 +53,27 @@ namespace dwmBard.Logger
             log($"[{DateTime.Now.ToString("HH:mm:ss")}] Warning: {message}");
         }
 
+        // TODO:
+        // Writing to console works fine so the message is there.
+        // But when it comes to logging to file its not really working.
         private static void log(string message)
         {
             Console.WriteLine(message);
             if (!enableLogging)
                 return;
 
+            retry:
             try
-            { 
-                writer = new StreamWriter($"{LOGGING_FILE_DIRECTORY}/{LOGGING_FILE}", true);
+            {
+                var writer = new StreamWriter($"{LOGGING_FILE_DIRECTORY}/{LOGGING_FILE}", true, Encoding.UTF8);
                 writer.WriteLine(message);
                 writer.Close();
             }
-            catch (Exception e){/*Unable to log.*/}
+            catch (Exception e)
+            {
+                Thread.Sleep((int)CommonTimeouts.Second);
+                goto retry;
+            }
         }
     }
 }

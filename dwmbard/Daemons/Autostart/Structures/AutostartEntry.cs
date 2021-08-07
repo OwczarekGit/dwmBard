@@ -41,7 +41,7 @@ namespace dwmBard.Daemons
         */
         private void assureIsRunning()
         {
-            int restartCount = 0;
+            int restartCount = 1;
             do
             {
                 Logger.Logger.info($"Autostart entry: {processName} started for: {restartCount} time.");
@@ -59,10 +59,14 @@ namespace dwmBard.Daemons
 
                 process.Start();
                 process.WaitForExit();
-                
-                Logger.Logger.error($"Autostart entry: {processName} exited!");
+
+                if (keepRunning)
+                    Logger.Logger.error($"Autostart entry: {processName} exited!");
+                    
                 restartCount++;
             } while (keepRunning);
+            
+            Logger.Logger.info($"Autostart entry: {processName} exited as it should.");
         }
         
 
