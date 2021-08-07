@@ -21,7 +21,7 @@ namespace dwmBard.Daemons
 
             this.pgrepName = pgrepName ?? processName;
             runner = new Thread(assureIsRunning);
-            runner.Name = processName;
+            runner.Name = $"dwmbard_{processName}";
         }
 
         public void start()
