@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Threading;
 using dwmBard.Helpers;
 
@@ -45,7 +46,35 @@ namespace dwmBard.Daemons
             do
             {
                 Logger.Logger.info($"Autostart entry: {processName} started for: {restartCount} time.");
-                var process = new Process
+                
+                using (Process process = new Process())
+                {
+                    process.StartInfo.FileName = "/bin/bash";
+                    process.StartInfo.Arguments = $"-c \"{processName}\"";
+
+                    process.StartInfo.CreateNoWindow = true;
+                    process.StartInfo.RedirectStandardOutput = true;
+                    process.StartInfo.RedirectStandardError = true;
+                    process.StartInfo.UseShellExecute = false;
+                    
+                    process.OutputDataReceived += (sender, args) =>
+                    {
+                        Logger.Logger.info($"{processName}: {args.Data}");
+                    };
+
+                    process.ErrorDataReceived += (sender, args) =>
+                    {
+                        Logger.Logger.error($"{processName}: {args.Data}");
+                    };
+                    
+                    process.Start();
+                    process.BeginOutputReadLine();
+                    process.BeginErrorReadLine();
+
+                    process.WaitForExit();
+                }
+                
+                /*var process = new Process
                 {
                     StartInfo = new ProcessStartInfo
                     {
@@ -58,7 +87,7 @@ namespace dwmBard.Daemons
                 };
 
                 process.Start();
-                process.WaitForExit();
+                process.WaitForExit();*/
 
                 if (keepRunning)
                     Logger.Logger.error($"Autostart entry: {processName} exited!");

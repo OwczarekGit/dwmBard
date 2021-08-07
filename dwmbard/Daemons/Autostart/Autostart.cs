@@ -13,7 +13,7 @@ namespace dwmBard.Daemons
             
         public static void start()
         {
-            Logger.Logger.info("Autostart daemon started!"); 
+            Logger.Logger.warning("Autostart daemon started!"); 
             AUTOSTART_DIRECTORY_PATH = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}/.config/dwmBard";
 
             reloadAutostart();
