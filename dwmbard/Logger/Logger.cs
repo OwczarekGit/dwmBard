@@ -71,7 +71,6 @@ namespace dwmBard.Logger
             }
             catch (Exception e)
             {
-                Thread.Sleep((int)CommonTimeouts.Second);
                 goto retry;
             }
         }
