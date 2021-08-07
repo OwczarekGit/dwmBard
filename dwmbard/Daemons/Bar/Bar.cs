@@ -10,7 +10,7 @@ using wmExtender.Structures;
 
 namespace dwmBard.Daemons
 {
-    public class Bar
+    class Bar
     {
         public const string CONFIG_FILE = "dwmbard.conf";
         public static List<IParallelWorker> handlers = new List<IParallelWorker>();
@@ -23,6 +23,7 @@ namespace dwmBard.Daemons
         public static void start()
         {
             Console.WriteLine("Bar daemon started!");
+            Logger.Logger.warning("Bar daemon started.");
             CONFIG_DIRECTORY_PATH = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}/.config/dwmBard";
             
             var unixSignal = new SignalHandler(handlers);
@@ -119,6 +120,8 @@ namespace dwmBard.Daemons
 
             foreach (var handler in handlers)
                 handler.doWork();
+            
+            Logger.Logger.info("Bar config reloaded.");
         }
 
         // TODO: For some reason it only works in IDE, why? idk. ¯\_(ツ)_/¯

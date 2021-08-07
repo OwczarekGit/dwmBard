@@ -31,6 +31,7 @@ namespace dwmBard.Daemons
             
             running = true;
             runner.Start();
+            Logger.Logger.info($"Autostart entry: {processName} started, keepRunning is: {keepRunning}.");
         }
 
         /* TODO: Fix ↓
@@ -40,8 +41,10 @@ namespace dwmBard.Daemons
         */
         private void assureIsRunning()
         {
+            int restartCount = 0;
             do
             {
+                Logger.Logger.info($"Autostart entry: {processName} started for: {restartCount} time.");
                 var process = new Process
                 {
                     StartInfo = new ProcessStartInfo
@@ -56,8 +59,9 @@ namespace dwmBard.Daemons
 
                 process.Start();
                 process.WaitForExit();
-                Console.WriteLine(process.StandardOutput.ReadToEnd());
                 
+                Logger.Logger.error($"Autostart entry: {processName} exited!");
+                restartCount++;
             } while (keepRunning);
         }
         

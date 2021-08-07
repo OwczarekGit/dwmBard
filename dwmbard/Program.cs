@@ -1,7 +1,7 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using dwmBard.Daemons;
 using dwmBard.Enums;
+using dwmBard.Logger;
 
 namespace dwmBard
 {
@@ -9,11 +9,16 @@ namespace dwmBard
     {
         static void Main(string[] args)
         {
+            Logger.Logger.start();
+            
             Autostart.start();
             Bar.start();
 
+            Logger.Logger.info("Main thread goes into sleep mode.");
             while (true)
                 Thread.Sleep((int)CommonTimeouts.Minute);
+            
+            Logger.Logger.error("This should never happen.");
         }
     }
 }
