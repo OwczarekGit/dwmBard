@@ -22,7 +22,6 @@ namespace dwmBard.Daemons
 
         public static void start()
         {
-            Console.WriteLine("Bar daemon started!");
             Logger.Logger.warning("Bar daemon started.");
             CONFIG_DIRECTORY_PATH = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}/.config/dwmBard";
             

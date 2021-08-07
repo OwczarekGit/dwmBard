@@ -30,8 +30,8 @@ namespace dwmBard.Daemons
                 return;
             
             running = true;
-            runner.Start();
             Logger.Logger.info($"Autostart entry: {processName} started, keepRunning is: {keepRunning}.");
+            runner.Start();
         }
 
         /* TODO: Fix ↓

@@ -10,6 +10,8 @@ namespace dwmBard
         static void Main(string[] args)
         {
             Logger.Logger.start();
+         
+            Logger.Logger.info("Program started.");
             
             Autostart.start();
             Bar.start();

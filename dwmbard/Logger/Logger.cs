@@ -52,6 +52,7 @@ namespace dwmBard.Logger
 
         private static void log(string message)
         {
+            Console.WriteLine(message);
             if (!enableLogging)
                 return;
 
