@@ -39,7 +39,7 @@ namespace dwmBard.Handlers
             }
             else
             {
-                if (artist.Length + title.Length > 20)
+                if (artist.Length + title.Length > 40)
                 {
                     returnValue = $" {title}".Replace('\'', '`').Replace('\"','`');
                 }
