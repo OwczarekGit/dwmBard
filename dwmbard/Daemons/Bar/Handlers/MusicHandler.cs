@@ -35,11 +35,18 @@ namespace dwmBard.Handlers
 
             if (status.Equals(""))
             {
-                returnValue = $" Nothing";
+                returnValue = $"";
             }
             else
             {
-                returnValue = $" {artist} - {title}".Replace('\'', '`').Replace('\"','`');
+                if (artist.Length + title.Length > 20)
+                {
+                    returnValue = $" {title}".Replace('\'', '`').Replace('\"','`');
+                }
+                else
+                {
+                    returnValue = $" {artist} - {title}".Replace('\'', '`').Replace('\"','`');
+                }
             }
 
             GC.Collect();
