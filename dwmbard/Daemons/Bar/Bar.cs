@@ -128,11 +128,10 @@ namespace dwmBard.Daemons
         {
             while (true)
             {
-                var watcher = new FileSystemWatcher(Bar.CONFIG_DIRECTORY_PATH);
-                watcher.Filter = Bar.CONFIG_FILE;
-                watcher.EnableRaisingEvents = true;
-                watcher.Changed += reloadConfig;
-                Thread.Sleep((int) CommonTimeouts.Hour);
+                var watcher = CommandRunner.getCommandOutput($"inotifywait -e close_write {CONFIG_DIRECTORY_PATH}/{CONFIG_FILE}");
+                reloadConfig(null, null);
+                Logger.Logger.info("Config changed.");
+                Thread.Sleep((int) CommonTimeouts.Second);
             }
         }
     }

@@ -4,7 +4,7 @@ Status bar daemon for dwm.
 ### Dependencies
 - dotnet 5.0
 - font-awesome 5
-- `bash wc sed pamixer pactl playerctl pgrep curl echo dunst networkmanager`
+- `bash wc sed pamixer pactl playerctl pgrep curl echo dunst networkmanager inotify-tools`
 
 Failing to satisfy all the dependancies does not mean that it won't work, but some handler might not function correctly.
 
