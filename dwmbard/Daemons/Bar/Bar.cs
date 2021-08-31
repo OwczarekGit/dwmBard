@@ -103,7 +103,8 @@ namespace dwmBard.Daemons
                 if (handler.isEnabled)
                     composed += $"{handler.getResult()} | ";
 
-            var converted = composed.Remove(composed.Length - 1, 1);
+            int trimEndCount = 1;
+            var converted = composed.Remove(composed.Length - trimEndCount, trimEndCount);
 
             CommandRunner.getCommandOutput($"xsetroot -name \'{converted}\'");
             //Console.WriteLine(converted);
@@ -123,7 +124,6 @@ namespace dwmBard.Daemons
             Logger.Logger.info("Bar config reloaded.");
         }
 
-        // TODO: For some reason it only works in IDE, why? idk. ¯\_(ツ)_/¯
         private static void initWatcher()
         {
             while (true)
