@@ -9,7 +9,7 @@ namespace dwmBard.Handlers
         private string titleCommand  = "playerctl metadata title";
         private string artistCommand = "playerctl metadata artist";
         private string statusCommand = "playerctl status";
-        private bool   isPlaying     = false;
+        private bool isPlaying     = false;
         
         
         public MusicHandler(int refreshTimeMs) : base(refreshTimeMs)
@@ -39,9 +39,17 @@ namespace dwmBard.Handlers
             }
             else
             {
-                if (artist.Length + title.Length > 40)
+                int maxLength = 60;
+                if (artist.Length + title.Length > maxLength)
                 {
-                    returnValue = $" {title}".Replace('\'', '`').Replace('\"','`');
+                    returnValue = $" {title}".Replace('\'', '`').Replace('\"', '`');
+                    
+                    if (returnValue.Length > maxLength)
+                    {
+                        int toCut = Math.Abs(maxLength - returnValue.Length);
+                        returnValue = returnValue.Remove(returnValue.Length - toCut-1, toCut+1);
+                        returnValue += "…";
+                    }
                 }
                 else
                 {
