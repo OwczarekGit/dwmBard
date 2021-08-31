@@ -9,7 +9,7 @@ namespace dwmBard.Handlers
         private string titleCommand  = "playerctl metadata title";
         private string artistCommand = "playerctl metadata artist";
         private string statusCommand = "playerctl status";
-        private bool isPlaying     = false;
+        private bool isPlaying = false;
         
         
         public MusicHandler(int refreshTimeMs) : base(refreshTimeMs)
