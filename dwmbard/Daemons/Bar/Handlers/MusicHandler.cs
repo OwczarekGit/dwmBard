@@ -1,15 +1,17 @@
 using System;
+using dwmBard.Daemons;
 using dwmBard.Helpers;
 using dwmBard.Interfaces;
 
 namespace dwmBard.Handlers
 {
-    public class MusicHandler : IParallelWorker
+    public class MusicHandler : IParallelWorker, IConfigurable
     {
         private string titleCommand  = "playerctl metadata title";
         private string artistCommand = "playerctl metadata artist";
         private string statusCommand = "playerctl status";
         private bool isPlaying = false;
+        private int maxTitleLength = 60;
         
         
         public MusicHandler(int refreshTimeMs) : base(refreshTimeMs)
@@ -39,14 +41,13 @@ namespace dwmBard.Handlers
             }
             else
             {
-                int maxLength = 60;
-                if (artist.Length + title.Length > maxLength)
+                if (artist.Length + title.Length > maxTitleLength)
                 {
                     returnValue = $" {title}".Replace('\'', '`').Replace('\"', '`');
                     
-                    if (returnValue.Length > maxLength)
+                    if (returnValue.Length > maxTitleLength)
                     {
-                        int toCut = Math.Abs(maxLength - returnValue.Length);
+                        int toCut = Math.Abs(maxTitleLength - returnValue.Length);
                         returnValue = returnValue.Remove(returnValue.Length - toCut-1, toCut+1);
                         returnValue += "…";
                     }
@@ -58,6 +59,12 @@ namespace dwmBard.Handlers
             }
 
             GC.Collect();
+        }
+        
+        void IConfigurable.configure()
+        {
+            var tmpLength = Bar.config.getConfigValue("MusicHandler.maxTitleLength");
+            maxTitleLength = tmpLength != null ? int.Parse(tmpLength) : maxTitleLength;
         }
     }
 }
