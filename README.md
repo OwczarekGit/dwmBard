@@ -1,6 +1,9 @@
 # dwmBard
 Status bar daemon for dwm.
 
+![Untitled](https://user-images.githubusercontent.com/32412218/132667062-38fe37c3-84ea-4132-ad22-820b313ec3bb.png)
+
+
 ### Dependencies
 - dotnet 5.0
 - font-awesome 5
