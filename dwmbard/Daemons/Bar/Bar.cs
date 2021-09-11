@@ -44,11 +44,9 @@ namespace dwmBard.Daemons
             handlers.Add(tmpWorker);
 
             tmpWorker = new NotificationHandler((int) CommonTimeouts.TenSeconds);
-            tmpWorker.setPrefix("");
             handlers.Add(tmpWorker);
 
             tmpWorker = new MicrophoneHandler((int) CommonTimeouts.TenSeconds);
-            tmpWorker.setPrefix("");
             handlers.Add(tmpWorker);
 
             tmpWorker = new UpdateHandler((int) CommonTimeouts.Hour);
