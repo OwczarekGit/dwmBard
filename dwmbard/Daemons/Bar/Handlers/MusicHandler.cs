@@ -25,7 +25,7 @@ namespace dwmBard.Handlers
 
             if (status.ToLower().Contains("playing"))
             {
-                returnValuePrefix = "";
+                returnValuePrefix = "";
             }
             else
             {
