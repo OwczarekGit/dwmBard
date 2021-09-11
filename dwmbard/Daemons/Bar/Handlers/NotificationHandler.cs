@@ -13,7 +13,6 @@ namespace dwmBard
         public NotificationHandler(int refreshTimeMs) : base(refreshTimeMs)
         {
             manualRefreshPossible = true;
-            returnValue = String.Empty;
         }
 
         public override void doWork()
@@ -23,11 +22,11 @@ namespace dwmBard
 
             if (statusPaused)
             {
-                returnValuePrefix = "";
+                returnValue = "";
             }
             else
             {
-                returnValuePrefix = "";
+                returnValue = "";
             }
         }
 

@@ -12,7 +12,13 @@ namespace wmExtender.Daemons.Bar.Handlers
 
         public override void doWork()
         {
-            returnValue = $"  {CommandRunner.getCommandOutput(updateCountCommand).Trim()}";
+            string result = CommandRunner.getCommandOutput(updateCountCommand).Trim();
+            
+            if (result != "0")
+                returnValue = $"  {result}";
+            else
+                returnValue = String.Empty;
+                
             GC.Collect();
         }
 

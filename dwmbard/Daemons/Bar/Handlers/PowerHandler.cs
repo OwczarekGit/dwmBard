@@ -50,6 +50,7 @@ namespace dwmBard.Handlers
             else
             {
                 returnValuePrefix = Power.AC.ToString();
+                returnValue = String.Empty;
             }
         }
 
@@ -63,8 +64,8 @@ namespace dwmBard.Handlers
                 }
                 else
                 {
-                    returnValue = "";
-                    return "";
+                    returnValue = String.Empty;
+                    return String.Empty;
                 }
             }
             else

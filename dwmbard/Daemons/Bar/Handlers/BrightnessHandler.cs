@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace dwmBard.Handlers
         public BrightnessHandler(int refreshTimeMs) : base(refreshTimeMs)
         {
             manualRefreshPossible = true;
+            returnValue = String.Empty;
             
             foreach (var backlight in Directory.GetDirectories(backlightDirectory))
             {
@@ -28,7 +30,7 @@ namespace dwmBard.Handlers
             }
             else
             {
-                returnValue = "";
+                returnValue = String.Empty;
             }
         }
     }

@@ -11,7 +11,6 @@ namespace dwmBard.Handlers
         public MicrophoneHandler(int refreshTimeMs) : base(refreshTimeMs)
         {
             manualRefreshPossible = true;
-            returnValue = String.Empty;
         }
 
         public override void doWork()
@@ -21,12 +20,12 @@ namespace dwmBard.Handlers
             if (result.ToLower().Contains("yes"))
             {
                 //returnValuePrefix = "";
-                returnValuePrefix = "";
+                returnValue = "";
             }
             else
             {
                 //returnValuePrefix = "";
-                returnValuePrefix = "";
+                returnValue = "";
             }
             
             GC.Collect();
