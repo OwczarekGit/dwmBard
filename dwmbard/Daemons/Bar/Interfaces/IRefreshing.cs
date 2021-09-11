@@ -24,7 +24,7 @@ namespace dwmBard.Interfaces
         
         public string? getResult()
         {
-            if (returnValue.Length > 0)
+            if (returnValue.Length > 0 || returnValue == String.Empty)
                 return $"{returnValuePrefix}{returnValue}";
 
             return null;
