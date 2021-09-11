@@ -6,6 +6,7 @@ using dwmBard.Enums;
 using dwmBard.Handlers;
 using dwmBard.Helpers;
 using dwmBard.Interfaces;
+using wmExtender.Daemons.Bar.Handlers;
 using wmExtender.Structures;
 
 namespace dwmBard.Daemons
@@ -44,6 +45,10 @@ namespace dwmBard.Daemons
 
             tmpWorker = new NotificationHandler((int) CommonTimeouts.TenSeconds);
             tmpWorker.setPrefix("");
+            handlers.Add(tmpWorker);
+
+            tmpWorker = new UpdateHandler((int) CommonTimeouts.Hour);
+            tmpWorker.setPrefix("");
             handlers.Add(tmpWorker);
 
             tmpWorker = new MicrophoneHandler((int) CommonTimeouts.TenSeconds);
