@@ -12,12 +12,13 @@ namespace dwmBard.Logger
         public static string LOGGING_FILE;
         public static string LOGGING_FILE_DIRECTORY;
         private static DateTime timeStarted;
-        private static bool enableLogging = true;
+        private static bool enableLogging = false;
 
         public static void start()
         {
             LOGGING_FILE_DIRECTORY = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}/.config/dwmBard";
 
+            enableLogging = true;
             prepareLoggingFile();
             
             info("Logging started!");
