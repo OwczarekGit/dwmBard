@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 
 namespace dwmBard.Interfaces
@@ -21,9 +22,12 @@ namespace dwmBard.Interfaces
             returnValuePrefix = prefix;
         }
         
-        public string getResult()
+        public string? getResult()
         {
-            return $"{returnValuePrefix}{returnValue}";
+            if (returnValue.Length > 0)
+                return $"{returnValuePrefix}{returnValue}";
+
+            return null;
         }
     }
 }
