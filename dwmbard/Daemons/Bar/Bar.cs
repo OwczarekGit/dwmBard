@@ -101,7 +101,12 @@ namespace dwmBard.Daemons
 
             foreach (var handler in handlers)
                 if (handler.isEnabled)
-                    composed += $"{handler.getResult()} | ";
+                {
+                    var result = handler.getResult();
+
+                    if (result != null)
+                        composed += $"{handler.getResult()} | ";
+                }
 
             int trimEndCount = 1;
             var converted = composed.Remove(composed.Length - trimEndCount, trimEndCount);
