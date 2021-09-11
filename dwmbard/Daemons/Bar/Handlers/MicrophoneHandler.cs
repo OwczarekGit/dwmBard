@@ -11,6 +11,7 @@ namespace dwmBard.Handlers
         public MicrophoneHandler(int refreshTimeMs) : base(refreshTimeMs)
         {
             manualRefreshPossible = true;
+            returnValue = String.Empty;
         }
 
         public override void doWork()

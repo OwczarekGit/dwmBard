@@ -1,3 +1,4 @@
+using System;
 using dwmBard.Helpers;
 using dwmBard.Interfaces;
 
@@ -12,11 +13,12 @@ namespace dwmBard
         public NotificationHandler(int refreshTimeMs) : base(refreshTimeMs)
         {
             manualRefreshPossible = true;
-            returnValue = "";
+            returnValue = String.Empty;
         }
 
         public override void doWork()
         {
+            
             var statusPaused = isPaused();
 
             if (statusPaused)
