@@ -47,12 +47,12 @@ namespace dwmBard.Daemons
             tmpWorker.setPrefix("");
             handlers.Add(tmpWorker);
 
-            tmpWorker = new UpdateHandler((int) CommonTimeouts.Hour);
-            tmpWorker.setPrefix("");
-            handlers.Add(tmpWorker);
-
             tmpWorker = new MicrophoneHandler((int) CommonTimeouts.TenSeconds);
             tmpWorker.setPrefix("");
+            handlers.Add(tmpWorker);
+
+            tmpWorker = new UpdateHandler((int) CommonTimeouts.Hour);
+            tmpWorker.setPrefix("");
             handlers.Add(tmpWorker);
 
             tmpWorker = new SoundHandler((int) CommonTimeouts.Second);
