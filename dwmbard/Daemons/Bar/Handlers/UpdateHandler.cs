@@ -8,10 +8,7 @@ namespace wmExtender.Daemons.Bar.Handlers
     {
         private string updateCountCommand = "pacman -Sup | wc -l";
         
-        public UpdateHandler(int refreshTimeMs) : base(refreshTimeMs)
-        {
-            manualRefreshPossible = true;
-        }
+        public UpdateHandler(int refreshTimeMs) : base(refreshTimeMs){}
 
         public override void doWork()
         {
