@@ -27,6 +27,29 @@ namespace dwmBard.Helpers
             return result;
         }
         
+        public static (string, string) getCommandOutputWithStdErr(string command)
+        {
+            var process = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = "/bin/bash",
+                    Arguments = $"-c \"{command}\"",
+                    CreateNoWindow = true,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                }
+            };
+
+            process.Start();
+            process.WaitForExit();
+            string stdOutResult = process.StandardOutput.ReadToEnd();
+            string stdErrResult = process.StandardOutput.ReadToEnd();
+
+            return (stdOutResult, stdErrResult);
+        }
+        
         public static void runCommand(string command)
                 {
                     var process = new Process

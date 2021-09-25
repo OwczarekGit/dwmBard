@@ -21,9 +21,12 @@ namespace dwmBard.Handlers
 
         public override void doWork()
         {
-            var status = CommandRunner.getCommandOutput(statusCommand).Trim();
+            var status = CommandRunner.getCommandOutputWithStdErr(statusCommand);
+            
+            var stdOut = status.Item1.Trim();
+            //var stdErr = status.Item2.Trim();
 
-            if (status.ToLower().Contains("playing"))
+            if (stdOut.ToLower().Contains("playing"))
             {
                 returnValuePrefix = "";
             }
