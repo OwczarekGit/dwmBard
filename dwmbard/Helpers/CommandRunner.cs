@@ -1,6 +1,8 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
+using wmExtender.Daemons.Bar.Structures;
 
 namespace dwmBard.Helpers
 {
@@ -27,7 +29,7 @@ namespace dwmBard.Helpers
             return result;
         }
         
-        public static (string, string) getCommandOutputWithStdErr(string command)
+        public static CommandOutput getCommandOutputWithStdErr(string command)
         {
             var process = new Process
             {
@@ -38,6 +40,7 @@ namespace dwmBard.Helpers
                     CreateNoWindow = true,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
+                    StandardErrorEncoding = Encoding.UTF8,
                     UseShellExecute = false,
                 }
             };
@@ -47,7 +50,7 @@ namespace dwmBard.Helpers
             string stdOutResult = process.StandardOutput.ReadToEnd();
             string stdErrResult = process.StandardOutput.ReadToEnd();
 
-            return (stdOutResult, stdErrResult);
+            return new CommandOutput(stdOutResult, stdErrResult, process.ExitCode);
         }
         
         public static void runCommand(string command)

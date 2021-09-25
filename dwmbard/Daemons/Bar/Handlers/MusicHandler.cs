@@ -22,11 +22,8 @@ namespace dwmBard.Handlers
         public override void doWork()
         {
             var status = CommandRunner.getCommandOutputWithStdErr(statusCommand);
-            
-            var stdOut = status.Item1.Trim();
-            //var stdErr = status.Item2.Trim();
 
-            if (stdOut.ToLower().Contains("playing"))
+            if (status.stdOut.ToLower().Contains("playing"))
             {
                 returnValuePrefix = "";
             }
@@ -35,16 +32,16 @@ namespace dwmBard.Handlers
                 returnValuePrefix = "";
             }
 
-            string artist = CommandRunner.getCommandOutput(artistCommand).Trim();
-            string title = CommandRunner.getCommandOutput(titleCommand).Trim();
+            var artist = CommandRunner.getCommandOutputWithStdErr(artistCommand);
+            var title = CommandRunner.getCommandOutputWithStdErr(titleCommand);
 
-            if (status.Equals(""))
+            if (status.Equals("") || status.exitCode != 0)
             {
                 returnValue = $"";
             }
             else
             {
-                if (artist.Length + title.Length > maxTitleLength)
+                if (artist.stdOut.Length + title.stdOut.Length > maxTitleLength)
                 {
                     returnValue = $" {title}".Replace('\'', '`').Replace('\"', '`');
                     
@@ -57,7 +54,7 @@ namespace dwmBard.Handlers
                 }
                 else
                 {
-                    returnValue = $" {artist} - {title}".Replace('\'', '`').Replace('\"','`');
+                    returnValue = $" {artist.stdOut} - {title.stdOut}".Replace('\'', '`').Replace('\"','`');
                 }
             }
 
