@@ -32,7 +32,7 @@ namespace dwmBard.Daemons
             IParallelWorker tmpWorker;
 
             tmpWorker = new MusicHandler((int) CommonTimeouts.FiveSeconds);
-            tmpWorker.setPrefix("");
+            tmpWorker.setPrefix("");
             handlers.Add(tmpWorker);
 
             tmpWorker = new NetworkHandler((int) CommonTimeouts.ThirtySeconds);
@@ -50,7 +50,7 @@ namespace dwmBard.Daemons
             handlers.Add(tmpWorker);
 
             tmpWorker = new UpdateHandler((int) CommonTimeouts.Hour);
-            tmpWorker.setPrefix("");
+            tmpWorker.setPrefix("");
             handlers.Add(tmpWorker);
 
             tmpWorker = new SoundHandler((int) CommonTimeouts.Second);
@@ -62,11 +62,11 @@ namespace dwmBard.Daemons
             handlers.Add(tmpWorker);
 
             tmpWorker = new BrightnessHandler((int) CommonTimeouts.Second);
-            tmpWorker.setPrefix("");
+            tmpWorker.setPrefix("");
             handlers.Add(tmpWorker);
 
             tmpWorker = new DateHandler((int) CommonTimeouts.Minute);
-            tmpWorker.setPrefix("");
+            tmpWorker.setPrefix("");
             handlers.Add(tmpWorker);
 
             tmpWorker = new TimeHandler((int) CommonTimeouts.Second);

@@ -25,11 +25,11 @@ namespace dwmBard.Handlers
 
             if (status.ToLower().Contains("playing"))
             {
-                returnValuePrefix = "";
+                returnValuePrefix = "";
             }
             else
             {
-                returnValuePrefix = "";
+                returnValuePrefix = "";
             }
 
             string artist = CommandRunner.getCommandOutput(artistCommand).Trim();

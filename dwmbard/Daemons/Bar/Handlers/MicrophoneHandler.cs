@@ -20,12 +20,12 @@ namespace dwmBard.Handlers
             if (result.ToLower().Contains("yes"))
             {
                 //returnValuePrefix = "";
-                returnValue = "";
+                returnValue = "";
             }
             else
             {
                 //returnValuePrefix = "";
-                returnValue = "";
+                returnValue = "";
             }
             
             GC.Collect();
