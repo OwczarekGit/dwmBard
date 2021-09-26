@@ -35,7 +35,7 @@ namespace dwmBard.Handlers
             var artist = CommandRunner.getCommandOutputWithStdErr(artistCommand);
             var title = CommandRunner.getCommandOutputWithStdErr(titleCommand);
 
-            if (status.Equals("") || status.exitCode != 0)
+            if (status.Equals("") || status.exitedAbnormally() || artist.exitedAbnormally() || title.exitedAbnormally())
             {
                 returnValue = $"";
             }
