@@ -43,7 +43,7 @@ namespace dwmBard.Handlers
             {
                 if (artist.stdOut.Length + title.stdOut.Length > maxTitleLength)
                 {
-                    returnValue = $" {title}".Replace('\'', '`').Replace('\"', '`');
+                    returnValue = $" {title.stdOut}".Replace('\'', '`').Replace('\"', '`');
                     
                     if (returnValue.Length > maxTitleLength)
                     {
